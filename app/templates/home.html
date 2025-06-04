@@ -1,0 +1,121 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="row mb-4">
+  <div class="col">
+    <h1 class="mb-4 display-4">Últimos ejercicios</h1>
+    <!-- Sentences -->
+    <div class="card">
+      <div class="card-header">
+        <h2>
+          <a href="/sentences" class="text-decoration-none">Frases</a>
+        </h2>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover m-0">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-center">Dificultad</th>
+                <th class="text-center">Lista</th>
+                <th class="text-center">Número</th>
+                <th class="text-center">Español</th>
+                <th class="text-center d-md-table-cell">Traducción correcta</th>
+                <th class="text-center d-lg-table-cell">Traducción incorrecta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for e in sentences %}
+              <tr>
+                <td class="text-center">{{ e[0] }}</td>
+                <td class="text-center">{{ e[1] }}</td>
+                <td class="text-center">{{ e[2] }}</td>
+                <td class="text-center">{{ e[3] }}</td>
+                <td class="en text-center d-md-table-cell">{{ e[4] }}</td>
+                <td class="en error-message text-center d-lg-table-cell">{{ e[5] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <!-- Irregular Verbs -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h2>
+          <a href="/irregular_verbs" class="text-decoration-none">Verbos irregulares</a>
+        </h2>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover m-0">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-center">Español</th>
+                <th class="text-center">Infinitivo</th>
+                <th class="text-center">Pasado</th>
+                <th class="text-center">Participio</th>
+                <th class="text-center">Veces preguntado</th>
+                <th class="text-center">Errores</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for iv in irregular_verbs %}
+              <tr>
+                <td class="text-center">{{ iv[0] }}</td>
+                <td class="en text-center">{{ iv[1] }}</td>
+                <td class="en text-center">{{ iv[2] }}</td>
+                <td class="en text-center">{{ iv[3] }}</td>
+                <td class="text-center">{{ iv[4] }}</td>
+                <td class="text-center">{{ iv[5] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phrasal Verbs -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h2>
+          <a href="/phrasal_verbs" class="text-decoration-none">Verbos compuestos</a>
+        </h2>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover m-0">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-center">Español</th>
+                <th class="text-center">Inglés</th>
+                <th class="text-center">Veces preguntado</th>
+                <th class="text-center">Errores</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for pv in phrasal_verbs %}
+              <tr>
+                <td class="text-center">{{ pv[0] }}</td>
+                <td class="en text-center">{{ pv[1] }}</td>
+                <td class="text-center">{{ pv[2] }}</td>
+                <td class="text-center">{{ pv[3] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

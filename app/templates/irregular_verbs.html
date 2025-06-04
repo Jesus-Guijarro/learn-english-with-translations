@@ -1,0 +1,94 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div id="verbs-content">
+  <h1 class="display-4 mb-4">Verbos Irregulares</h1>
+  <div class="row g-4">
+    <!-- New exercise -->
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <h2>Nuevo ejercicio</h2>
+        </div>
+        <div class="card-body">
+          <form action="/irregular_verbs" method="POST">
+            <div class="mb-3 row align-items-center">
+              <label for="group_verbs" class="col-sm-6 col-form-label">Bloque de verbos (1‑13):</label>
+              <div class="col-sm-2">
+                <input type="number"
+                       class="form-control form-control-sm"
+                       name="group_verbs"
+                       id="group_verbs"
+                       min="1" max="13"
+                       value="{{ group_verbs }}"
+                       required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Nuevo ejercicio</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>Lista de verbos</h2>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th class="text-center">Español</th>
+                  <th class="text-center">Infinitivo</th>
+                  <th class="text-center">Pasado</th>
+                  <th class="text-center">Participio</th>
+                  <th class="text-center">Veces preguntado</th>
+                  <th class="text-center">Veces fallado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for d in data %}
+                <tr>
+                  <td class="text-center">{{ d[0] }}</td>
+                  <td class="en text-center">{{ d[1] }}</td>
+                  <td class="en text-center">{{ d[2] }}</td>
+                  <td class="en text-center">{{ d[3] }}</td>
+                  <td class="text-center">{{ d[4] }}</td>
+                  <td class="text-center">{{ d[5] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <nav aria-label="Page navigation" class="mt-3">
+        <ul class="pagination justify-content-center flex-wrap mb-0">
+          {% for p in range(1, (total_rows // per_page) + 1) %}
+          <li class="page-item{% if p == page|int %} active{% endif %}">
+            <a class="page-link" href="{{ url_for('irregular_verbs.index', page=p) }}#verbs-content">{{ p }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page');
+    if (page) {
+      document.getElementById("group_verbs").value = page;
+    }
+    if (window.location.hash === '#verbs-content') {
+      document.getElementById('verbs-content').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
+{% endblock %}

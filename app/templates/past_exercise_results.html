@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1 class="display-4 mb-4">Datos del ejercicio</h1>
+
+<div class="card">
+<div class="card-body">
+    <div class="table-responsive">
+    <table class="table table-bordered table-striped mb-0">
+        <thead class="table-dark">
+        <tr>
+            <th class="text-center">Dificultad</th>
+            <th class="text-center">Lista</th>
+            <th class="text-center">Número</th>
+            <th class="text-center">Español</th>
+            <th class="text-center">Traducción correcta</th>
+            <th class="text-center">Traducción incorrecta</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for e in exercise %}
+        <tr>
+            <td class="text-center">{{ e[0] }}</td>
+            <td class="text-center">{{ e[1] }}</td>
+            <td class="text-center">{{ e[2] }}</td>
+            <td class="text-center">{{ e[3] }}</td>
+            <td class="en text-center">{{ e[4] }}</td>
+            <td class="en error-message text-center">{{ e[5] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+    <a href="/sentences" class="btn btn-primary">Atrás</a>
+    </div>
+</div>
+</div>
+
+{% endblock %}

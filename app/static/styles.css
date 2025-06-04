@@ -1,0 +1,78 @@
+/* styles.css */
+
+/* Root Variables */
+:root {
+    --primary-color: #09407a;
+    --secondary-color: #3C91E6;
+    --neutral-bg: #F7F7F7;
+    --error-color: #ca2f2f;
+  }
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: var(--neutral-bg);
+    color: #000;
+}
+header {
+    background: var(--primary-color);
+    color: #fff;
+    text-align: center;
+}
+
+header .container {
+    padding: 0.5rem 0;
+}
+
+footer {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 0.625rem;
+    text-align: left;
+}
+
+/* Typography */
+.en {
+    font-style: italic;
+    font-weight: bold;
+}
+.error-message,
+.text-danger {
+    color: var(--error-color) !important;
+}
+
+/* Components */
+.card {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+}
+.lewt-btn {
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+}
+
+.table-dark {
+    --bs-table-color: #fff;
+    --bs-table-bg: var(--primary-color);
+}
+
+/* Utilities */
+.p-0 { padding: 0 !important; }
+
+.text-center { text-align: center !important; }
+
+.text-start { text-align: left !important; }
+
+.logo-img { max-width: 15em; }
+
+.main-content {
+    margin: 1.5em 2.4em 2.4em 2.4em;
+}
+
+/* Override primary color for navbar*/
+.bg-primary{
+  background-color: rgb(80, 110, 150) !important;
+  border-color: rgb(80, 110, 150) !important;
+}

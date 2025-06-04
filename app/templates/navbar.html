@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top border-bottom" role="navigation">
+  <div class="container-fluid ms-3">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path.startswith('/sentences') %}active{% endif %}" href="/sentences">Frases</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path.startswith('/irregular_verbs') %}active{% endif %}" href="/irregular_verbs">Verbos Irregulares</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path.startswith('/phrasal_verbs') %}active{% endif %}" href="/phrasal_verbs">Verbos Compuestos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

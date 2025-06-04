@@ -1,0 +1,124 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1 class="display-4 mb-4">Frases</h1>
+<div class="row g-4">
+  <!-- Sentences -->
+  <div class="col-lg-6">
+    <div class="card h-100">
+      <div class="card-header">
+        <h2>Lista</h2>
+      </div>
+      <div class="card-body">
+        <form action="/sentences" method="POST">
+          <input type="hidden" name="action" value="show_list">
+          <div class="mb-3 row align-items-center">
+            <label for="difficulty_list" class="col-sm-3 col-form-label">Dificultad (1-6):</label>
+            <div class="col-sm-2">
+              <input type="number" class="form-control form-control-sm" name="difficulty" id="difficulty_list" min="1" max="6" value="{{ difficulty }}" required>
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <label for="list_num_list" class="col-sm-3 col-form-label">Lista (1-18):</label>
+            <div class="col-sm-2">
+              <input type="number" class="form-control form-control-sm" name="list_num" id="list_num_list" min="1" max="18" value="{{ list_num }}" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Mostrar lista</button>
+        </form>
+
+        {% if data %}
+        <hr class="my-4">
+        <h3 class="h6">Lista consultada</h3>
+        <p><strong>Dificultad:</strong> {{ difficulty }}</p>
+        <p><strong>Lista:</strong> {{ list_num }}</p>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-center">Español</th>
+                <th class="text-center">Inglés</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in data %}
+              <tr>
+                <td class="text-center">{{ d[1] }}</td>
+                <td class="en text-center">{{ d[2] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 d-flex flex-column">
+    <!-- New exercise -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2>Configuración de nuevo ejercicio</h2>
+      </div>
+      <div class="card-body">
+        <form action="/sentences" method="POST">
+          <input type="hidden" name="action" value="start_exercise">
+          <div class="mb-3 row align-items-center">
+            <label for="difficulty_config" class="col-sm-3 col-form-label">Dificultad (1-6):</label>
+            <div class="col-sm-2">
+              <input type="number" class="form-control form-control-sm" name="difficulty" id="difficulty_config" min="1" max="6" value="{{ difficulty }}" required>
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <label for="list_num_config" class="col-sm-3 col-form-label">Lista (1-18):</label>
+            <div class="col-sm-2">
+              <input type="number" class="form-control form-control-sm" name="list_num" id="list_num_config" min="1" max="30" value="{{ list_num }}" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Nuevo ejercicio</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Last exercises -->
+    <div class="card  mb-4">
+      <div class="card-header">
+        <h2>Últimos ejercicios realizados</h2>
+      </div>
+      <div class="card-body">
+        {% if results_data %}
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-center">Dificultad</th>
+                <th class="text-center">Lista</th>
+                <th class="text-center">Errores</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Ver</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in results_data %}
+              <tr>
+                <td class="text-center">{{ d[0] }}</td>
+                <td class="text-center">{{ d[1] }}</td>
+                <td class="text-center">{{ d[2] }}</td>
+                <td class="text-center">{{ d[3] }}</td>
+                <td class="text-center">
+                  <a href="{{ url_for('sentences.past_exercise_results', exercise_id=d[4]) }}" class="btn btn-link btn-sm">#{{ d[4] }}</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p>No hay resultados disponibles.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

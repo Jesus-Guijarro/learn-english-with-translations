@@ -1,0 +1,59 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<h1 class="display-4 mb-4 text-center">Ejercicio Verbos Compuestos</h1>
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <div class="card mx-auto" style="max-width:700px;">
+        <div class="card-body">
+          {% if errors %}
+          <div class="alert alert-danger" role="alert">
+            Errores cometidos: <strong>{{ errors|length }}</strong>
+          </div>
+          {% endif %}
+          <form action="{{ url_for('phrasal_verbs.exercise') }}" method="POST">
+            <input type="hidden" name="group_verbs" value="{{ group_verbs }}">
+            <input type="hidden" name="offset" value="{{ offset }}">
+
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered table-striped mb-0 mx-auto" style="width:auto;">
+                <thead class="table-dark text-center">
+                  <tr>
+                    <th>Español</th>
+                    <th>Inglés</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for s in data %}
+                  <tr>
+                    <td class="text-center px-2">{{ s[1] }}</td>
+                    <td class="text-center px-2">
+                      <input class="form-control form-control-sm text-center" type="text" maxlength="90" name="english_{{ loop.index }}" value="{{ request.form.get('english_' ~ loop.index, '') }}">
+                      {% if exercise_done and loop.index in errors %}
+                      <div class="text-danger small text-center mt-1">{{ s[2] }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+              {% if not exercise_done %}
+              <button type="submit" class="btn btn-primary">Evaluar</button>
+              {% else %}
+              <a href="/phrasal_verbs" class="btn btn-secondary me-2">Verbos Compuestos</a>
+              <a href="/" class="btn btn-primary">Salir</a>
+              {% endif %}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
